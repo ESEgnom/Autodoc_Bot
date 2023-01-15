@@ -8,9 +8,14 @@ from cfg import *
 def start_message(message):
     bot.send_message(message.chat.id,
                      f'Привет {message.chat.first_name}!  Я бот, который поможет тебе избавиться от запчастей ')
-    bot.send_message(message.chat.id,
-                     'Давай выясним, в каком магазине ты работешь как тебя зовут. Напиши через запятую код магазина и имя (Например: UFK, Вадим):')
-
+    keyboard = types.ReplyKeyboardMarkup(row_width=3, resize_keyboard=True, one_time_keyboard=True)
+    btn1 = types.KeyboardButton('/add_part')
+    btn2 = types.KeyboardButton('/find_part')
+    btn3 = types.KeyboardButton('/help')
+    keyboard.add(btn1, btn2)
+    bot.send_message(message.from_user.id, 'Давай выясним, в каком магазине ты работешь и как, ты хочешь что-бы тебя видели другие пользователи. '
+                                           'Напиши через запятую код магазина и имя (Например: UFK, Вадим):',
+                      reply_markup=keyboard)
 
 @bot.message_handler(func=adding_meneg)
 def add_user_handle(message):
@@ -20,7 +25,6 @@ def add_user_handle(message):
 @bot.message_handler(commands=['help'])
 def show_commands(message):
     bot.send_message(message.chat.id, '/help\n/add_part\n/find_part')
-
 
 @bot.message_handler(commands=['add_part'])
 def show_add_part_instruction_handle(message):
