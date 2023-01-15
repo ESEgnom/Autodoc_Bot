@@ -1,4 +1,5 @@
 from cfg import *
+from mailer import *
 
 
 def show_car_brand_id(message):
@@ -33,7 +34,12 @@ def instruction_add(message):
 
 def inst(message):
     '''Функция затычка'''
-    return True
+    print(f'adding_info.inst {message.text}')
+
+    if len(message.text) > len('/add_part'):
+        return True
+    else:
+        return False
 
 
 def add_info(message):
@@ -56,3 +62,4 @@ def add_info(message):
         connection.commit()
         print('деталь добавлена')
     bot.send_message(message.chat.id, 'Информация успешно добавлена.')
+    send_newsletter(message, f'артикул {info[0]} {info[1]} {info[2]}')

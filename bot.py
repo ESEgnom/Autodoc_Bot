@@ -1,6 +1,6 @@
 from adding_user import *
 from adding_info import *
-from program import *
+from finder_parts import *
 from cfg import *
 
 
@@ -9,7 +9,7 @@ def start_message(message):
     bot.send_message(message.chat.id,
                      f'Привет {message.chat.first_name}!  Я бот, который поможет тебе избавиться от запчастей ')
     bot.send_message(message.chat.id,
-                     'Давай выясним, в каком магазине ты работешь: ')
+                     'Давай выясним, в каком магазине ты работешь как тебя зовут. Напиши через запятую код магазина и имя (Например: UFK, Вадим):')
 
 
 @bot.message_handler(func=adding_meneg)
